@@ -6,14 +6,29 @@ let urlModel = require("../models/urls");
 /* Create Shortened URL */
 router.post("/api/create", function(req, res, next) {
   console.info('Preparing Shorthand Url');
-  let shorthand =
-    urlModel.storeShorthandURL(req.body.original_url, req.body.shorthand) ||
-    urlModel.storeShorthandURL(req.body.original_url);
+  req.body = req.body[0]; //bodyParser.json() return body in json notation.
+  let shorthand = '';
+  let conflictFlag = false;
+  if(req.body.shorthand){
+    shorthand = urlModel.storeShorthandURL(req.body.original_url, req.body.shorthand);
+    if(!shorthand){
+      conflictFlag = true;
+    }
+  }else{
+    shorthand = urlModel.storeShorthandURL(req.body.original_url);
+  }
   console.info('Finished Preparing Shorthand Url');
-  res.status(201);
-  res.json({
-    shorthand: shorthand
-  });
+  if(conflictFlag){
+    res.status(409);
+    res.json({
+      message: "Shorthand already exsists"
+    })
+  }else{
+    res.status(201);
+    res.json({
+      shorthand: shorthand
+    });
+  }
 });
 
 router.get("/:shorthand", function(req, res, next) {

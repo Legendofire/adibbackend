@@ -1,11 +1,27 @@
 let urlMap = new Map();
 
 exports.storeShorthandURL = function(original_url, shorthand) {
-    console.info('Storing Url/Shorthand Pair in Memory');
-    shorthand = shorthand || generateRandomString(8);
-    urlMap.set(shorthand, original_url);
-    console.info('Finished Storing Url/Shorthand Pair in Memory');
-    return shorthand;
+    console.info('Started Storing Shorthand URL');
+    if(shorthand){
+      if(urlMap.has(shorthand)){
+        console.log('Shorthand Already Exsists');
+        return null;
+      }else{
+        urlMap.set(shorthand, original_url);
+        console.log('Shorthand Stored Successfully');
+        return shorthand;
+      }
+    }else{
+      console.log('Generating Shorthand for URL');
+      while(true){
+        let shorthand = generateRandomString(8);
+        if(!urlMap.has(shorthand)){
+          urlMap.set(shorthand, original_url);
+          return shorthand;
+        }
+        console.log('Generated Shorthand Clashed, Retrying');
+      }
+    }
 }
 
 exports.getOriginalUrl = function(shorthand) {
