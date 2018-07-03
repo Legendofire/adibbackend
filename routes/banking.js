@@ -6,6 +6,12 @@ let mail = require("./mail");
 
 let balance_amount = 10000;
 
+router.get("/check_balance", function(req, res, next){
+  res.status(200);
+  res.json({
+    amount: balance_amount
+  })
+});
 
 /* Create Shortened URL */
 router.post("/check_balance", function(req, res, next) {

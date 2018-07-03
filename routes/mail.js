@@ -9,7 +9,13 @@ let card = {
 
 let interval = null;
 
-/* Create Shortened URL */
+router.get("/check_status", function(req, res, next){
+  res.status(200);
+  res.json({
+    card: card
+  })
+});
+
 router.post("/check_status", function(req, res, next) {
   res.json({
     status: card.status
