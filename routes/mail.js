@@ -32,9 +32,6 @@ function updateCard(){
       break;
     case "in route":
       card.status = "delivered";
-      break;
-    case "delivered":
-      card.status = "";
       clearInterval(interval);
       break;
     default:
