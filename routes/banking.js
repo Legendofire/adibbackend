@@ -41,8 +41,11 @@ router.post("/transfer_amount", function(req, res, next) {
 
 router.post("/issue_cc", function(req, res, next) {
   res.status(200);
+  let randomval = Math.floor(1000000000000000 + Math.random() * 9000000000000000)+"";
+  let groups = randomval.match(/([0-9]{4})([0-9]{4})([0-9]{4})([0-9]{4})/);
+  let ccnum = `${groups[1]}-${groups[2]}-${groups[3]}-${groups[4]}`;
   res.json({
-    card: mail.setCard(randomGen.generateRandomString(16),randomGen.generateRandomString(8),"issuing")
+    card: mail.setCard(ccnum,randomGen.generateRandomString(8),"issuing")
   });
 });
 
