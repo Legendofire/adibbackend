@@ -25,7 +25,7 @@ router.post("/transfer_amount", function(req, res, next) {
   const transfer_amount = req.body.amount;
   console.log(req.body);
   if(transfer_amount > balance_amount){
-    res.status(500);
+    res.status(200);
     res.json({
       message: "Insufficient Balance"
     })
