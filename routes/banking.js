@@ -42,7 +42,7 @@ router.post("/transfer_amount", function(req, res, next) {
 router.post("/issue_cc", function(req, res, next) {
   res.state(200);
   res.json({
-    card: mail.setCard(randomGen.generateRandomString(16),randomGen.generateRandomString(8),"issuing");
+    card: mail.setCard(randomGen.generateRandomString(16),randomGen.generateRandomString(8),"issuing")
   });
 });
 
