@@ -44,6 +44,7 @@ function setCard(id, ref, status){
   card.mail_reference = ref;
   card.status = status;
   interval = setInterval(updateCard,15000);
+  return card;
 };
 
 module.exports = router;
