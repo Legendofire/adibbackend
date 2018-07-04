@@ -43,7 +43,7 @@ function setCard(id, ref, status){
   card.id = id;
   card.mail_reference = ref;
   card.status = status;
-  interval = setInterval(updateCard,15000);
+  interval = setInterval(updateCard,5000);
   return card;
 };
 
